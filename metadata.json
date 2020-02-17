@@ -1,0 +1,18 @@
+{
+  "type": "application",
+  "name": "Keyboard",
+  "category": "development",
+  "server": "server.js",
+  "icon": "icon.png",
+  "singleton": true,
+  "title": {
+    "en_EN": "Keyboard"
+  },
+  "description": {
+    "en_EN": "Keyboard"
+  },
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}
