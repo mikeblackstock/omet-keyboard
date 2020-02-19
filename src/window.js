@@ -76,25 +76,13 @@ const createEditorInterface = (core, proc, win, $content) => {
 	const _ = core.make('osjs/locale').translate;
 	const vfs = core.make('osjs/vfs');
 	const contextmenu = core.make('osjs/contextmenu').show;
-	const basic = core.make('osjs/basic-application', proc, win, {
+//	const basic = core.make('osjs/basic-application', proc, win, {
 
-		defaultFilename: 'Default.ly'
-	});
+//		defaultFilename: 'Default.ly'
+//	});
 
 	// const setText = contents => editor.setValue(contents); 
-	const setText = function(contents, path) {
-		editor.setValue(contents);
-		editor.navigateFileStart();
 
-		win.setTitle(path);
-	};
-
-	const setSavedTitle = function(path) {
-		win.setTitle("Saved");
-		setTimeout(() => {
-			win.setTitle(path);
-		}, 1000);
-	};
 	const {icon} = core.make('osjs/theme');
 	const getText = () => editor.getValue();
 
@@ -102,9 +90,117 @@ const createEditorInterface = (core, proc, win, $content) => {
 
 	const view = (state, actions) => h(Box, {}, [
 
+h(Toolbar, {
+				style: {
+					display: state.showTools ? undefined : 'none'
+				} 		
+   	}, [
+       h(Button, {
+        title: 'Comment',
+        label: "%",
+  
+        onclick: () => actions.insert( "%")
+      }),
+
+      h(Button, {
+        title: 'Backslash',
+        label: "\\",
+  
+        onclick: () => actions.insert( "\\")
+      }),
+
+      h(Button, {
+        title: 'Left brace',
+        label: "{",
+  
+        onclick: () => actions.insert( "{")
+      }),
+      h(Button, {
+        title: 'Right brace',
+        label: "}",
+  
+        onclick: () => actions.insert( "}")
+      })
 
 
+
+	]),
+	
+ 
    	h(Toolbar, {
+				style: {
+					display: state.showTools ? undefined : 'none'
+				}
+				
+   	}, [
+
+
+       h(Button, {
+        title: 'c',
+        label: "c",
+ 
+        onclick: () => actions.insert( "c")
+      }),
+             h(Button, {
+        title: 'd',
+        label: "d",
+  
+        onclick: () => actions.insert( "d")
+      }),
+             h(Button, {
+        title: 'e',
+        label: "e",
+  
+        onclick: () => actions.insert( "e")
+      }),
+             h(Button, {
+        title: 'f',
+        label: "f",
+  
+        onclick: () => actions.insert( "f")
+      }),	  
+             h(Button, {
+        title: 'g',
+        label: "g",
+  
+        onclick: () => actions.insert( "g")
+      }),	  
+             h(Button, {
+        title: 'a',
+        label: "a",
+  
+        onclick: () => actions.insert( "a")
+      }),	  
+             h(Button, {
+        title: 'b',
+        label: "b",
+  
+        onclick: () => actions.insert( "b")
+      }),	
+      
+       h(Button, {
+        title: 'es',
+        label: "es",
+  
+        onclick: () => actions.insert( "es")
+      }),	   
+      
+        h(Button, {
+        title: 'is',
+        label: "is",
+  
+        onclick: () => actions.insert( "is")
+      }),
+      
+        h(Button, {
+        title: 'r',
+        label: "r",
+  
+        onclick: () => actions.insert( "r")
+      })	 
+ ]),
+ 
+  	h(Toolbar, {
 				style: {
 					display: state.showTools ? undefined : 'none'
 				} 		
@@ -188,79 +284,10 @@ const createEditorInterface = (core, proc, win, $content) => {
       
  ]),
 
-
-   	h(Toolbar, {
-				style: {
-					display: state.showTools ? undefined : 'none'
-				}
-				
-   	}, [
-
-
-       h(Button, {
-        title: 'c',
-        label: "c",
  
-        onclick: () => actions.insert( "c")
-      }),
-             h(Button, {
-        title: 'd',
-        label: "d",
-  
-        onclick: () => actions.insert( "d")
-      }),
-             h(Button, {
-        title: 'e',
-        label: "e",
-  
-        onclick: () => actions.insert( "e")
-      }),
-             h(Button, {
-        title: 'f',
-        label: "f",
-  
-        onclick: () => actions.insert( "f")
-      }),	  
-             h(Button, {
-        title: 'g',
-        label: "g",
-  
-        onclick: () => actions.insert( "g")
-      }),	  
-             h(Button, {
-        title: 'a',
-        label: "a",
-  
-        onclick: () => actions.insert( "a")
-      }),	  
-             h(Button, {
-        title: 'b',
-        label: "b",
-  
-        onclick: () => actions.insert( "b")
-      }),	
-      
-       h(Button, {
-        title: 'es',
-        label: "es",
-  
-        onclick: () => actions.insert( "es")
-      }),	   
-      
-        h(Button, {
-        title: 'is',
-        label: "is",
-  
-        onclick: () => actions.insert( "is")
-      }),
-      
-        h(Button, {
-        title: 'r',
-        label: "r",
-  
-        onclick: () => actions.insert( "r")
-      })	 
- ]),
+ 
+ 
+ 
 h(Toolbar, {
 				style: {
 					display: state.showTools ? undefined : 'none'
@@ -278,6 +305,15 @@ h(Toolbar, {
 				},  
         onclick: () => actions.insert( " ")
       }),
+      
+      h(Button, {
+        title: 'Tab',
+        label: "\\t",
+  
+        onclick: () => actions.insert( "\t")
+      }),      
+      
+      
    		h(Button, {
         title: 'Backpace',
         label: "bs",
@@ -292,7 +328,7 @@ h(Toolbar, {
         title: 'Delete',
         label: "del",
   
-        onclick: () => editor.remove()
+        onclick: () => actions.command('editor.remove()')
       }),   
       
       h(Button, {
@@ -306,14 +342,14 @@ h(Toolbar, {
         title: 'Undo',
 //        label: "<",
   		icon: icon('edit-undo'),
-        onclick: () => editor.undo()
+        onclick: () => actions.command('editor.undo()')
       }),
       
       h(Button, {
         title: 'Redo',
 //        label: "<",
   		icon: icon('edit-redo'),
-        onclick: () => editor.redo()
+        onclick: () => actions.command('editor.redo()')
       }),
  ]),
 
@@ -348,6 +384,10 @@ h(Toolbar, {
 			core.broadcast('Sandbox', 'Command', 'editor.navigateLeft(1)');	
 			core.broadcast('Sandbox', 'Command', 'editor.remove()');
 		},
+		
+		command: (cmd) => {
+			core.broadcast('Sandbox', 'Command',  cmd);
+		},
 		moreTools: (ev) => {
 
       		contextmenu({
@@ -375,14 +415,16 @@ h(Toolbar, {
 	}, view, $content);
 
 
-
+	win.on('focus', () => {
+		core.broadcast('Sandbox', 'Command', 'win.restore()');
+	});
 
 	proc.on('attention', (args) => {
 
 	});
 
 
-	basic.init();
+//	basic.init();
 	
 
 	return hyperapp;

@@ -40,12 +40,15 @@ let fileObj= {};
   	
   })
   proc.on('lilypond:compile', file => {
- 	fileObj= file;
+  	
 
-  	const username= core.getUser().username;
-    sendMessage(username, file);
+ fileObj= Object.assign({}, file);
+
+// 	const username= core.getUser().username;
+ 	sendMessage("lilypond", "", file);
+ //   sendMessage("lilypond", userID, file);
  
-  })
+  });
 
   proc.on('lilypond:open-result', file => {
     osjs.run('LegacyPDF', {file});
