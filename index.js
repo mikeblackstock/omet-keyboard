@@ -1,6 +1,6 @@
 import osjs from 'osjs';
 import {name as applicationName} from './metadata.json';
-import {createEditorWindow} from './src/window.js';
+import {createEditorWindow} from './src/keyboard-window.js';
 
 const register = (core, args, options, metadata) => {
 let fileObj= {};	

@@ -95,13 +95,14 @@ h(Toolbar, {
 					display: state.showTools ? undefined : 'none'
 				} 		
    	}, [
+ /*  	
        h(Button, {
         title: 'Comment',
         label: "%",
   
         onclick: () => actions.insert( "%")
       }),
-
+*/
       h(Button, {
         title: 'Backslash',
         label: "\\",
@@ -120,9 +121,54 @@ h(Toolbar, {
         label: "}",
   
         onclick: () => actions.insert( "}")
-      })
+      }),
 
-
+     h(Button, {
+        title: 'Less',
+        label: "<",
+  
+        onclick: () => actions.insert( "<")
+      }),
+      h(Button, {
+        title: 'Greater',
+        label: ">",
+  
+        onclick: () => actions.insert( ">")
+      }),
+      
+       h(Button, {
+        title: 'Left parentheses',
+        label: "(",
+  
+        onclick: () => actions.insert( "(")
+      }),
+      h(Button, {
+        title: 'Right parentheses',
+        label: ")",
+  
+        onclick: () => actions.insert( ")")
+      }),
+      
+       h(Button, {
+        title: 'Left bracket',
+        label: "[",
+  
+        onclick: () => actions.insert( "[")
+      }),
+      h(Button, {
+        title: 'Right bracket',
+        label: "]",
+  
+        onclick: () => actions.insert( "]")
+      }),
+      
+       h(Button, {
+        title: 'tie',
+        label: "~",
+  
+        onclick: () => actions.insert( "~")
+      })    
+      
 
 	]),
 	
@@ -416,7 +462,7 @@ h(Toolbar, {
 
 
 	win.on('focus', () => {
-		core.broadcast('Sandbox', 'Command', 'win.restore()');
+		core.broadcast('Sandbox', 'restore');
 	});
 
 	proc.on('attention', (args) => {
