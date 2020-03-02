@@ -95,80 +95,83 @@ h(Toolbar, {
 					display: state.showTools ? undefined : 'none'
 				} 		
    	}, [
- /*  	
+   	
        h(Button, {
         title: 'Comment',
         label: "%",
   
         onclick: () => actions.insert( "%")
       }),
-*/
+
+
+      h(Button, {
+        title: 'Exclamation',
+        label: "\!",
+  
+        onclick: () => actions.insert( "\!")
+      }),
+      
+       h(Button, {
+        title: 'Pipe',
+        label: "\|",
+  
+        onclick: () => actions.insert( "\|")
+      }),
+      
+        h(Button, {
+        title: 'Hyphen',
+        label: "-",
+  
+        onclick: () => actions.insert( "-")
+      }),  
+      
+       h(Button, {
+        title: 'Underscore',
+        label: "_",
+  
+        onclick: () => actions.insert( "_")
+      }),           
+      
+      h(Button, {
+        title: 'tie',
+        label: "~",
+  
+        onclick: () => actions.insert( "~")
+      }),    
+ 
+
+
+       h(Button, {
+        title: 'Equals',
+        label: "=",
+  
+        onclick: () => actions.insert( "=")
+      }),    
+
+       h(Button, {
+        title: 'Plus',
+        label: "+",
+  
+        onclick: () => actions.insert( "+")
+      }),          
       h(Button, {
         title: 'Backslash',
         label: "\\",
   
         onclick: () => actions.insert( "\\")
       }),
+ 
+ 
+        h(Button, {
+        title: 'More',
+        label: "...",
+//    	icon: icon('view-sort-descending'),
+//        onclick: () => editor.navigateDown(1)
+        onclick:  (ev) => actions.moreToolsRowI(ev)
+      }), 
+ 
+ 
 
-      h(Button, {
-        title: 'Left brace',
-        label: "{",
-  
-        onclick: () => actions.insert( "{")
-      }),
-      h(Button, {
-        title: 'Right brace',
-        label: "}",
-  
-        onclick: () => actions.insert( "}")
-      }),
-
-     h(Button, {
-        title: 'Less',
-        label: "<",
-  
-        onclick: () => actions.insert( "<")
-      }),
-      h(Button, {
-        title: 'Greater',
-        label: ">",
-  
-        onclick: () => actions.insert( ">")
-      }),
-      
-       h(Button, {
-        title: 'Left parentheses',
-        label: "(",
-  
-        onclick: () => actions.insert( "(")
-      }),
-      h(Button, {
-        title: 'Right parentheses',
-        label: ")",
-  
-        onclick: () => actions.insert( ")")
-      }),
-      
-       h(Button, {
-        title: 'Left bracket',
-        label: "[",
-  
-        onclick: () => actions.insert( "[")
-      }),
-      h(Button, {
-        title: 'Right bracket',
-        label: "]",
-  
-        onclick: () => actions.insert( "]")
-      }),
-      
-       h(Button, {
-        title: 'tie',
-        label: "~",
-  
-        onclick: () => actions.insert( "~")
-      })    
-      
 
 	]),
 	
@@ -226,8 +229,8 @@ h(Toolbar, {
       
        h(Button, {
         title: 'es',
-        label: "es",
-  
+                label: "es",
+
         onclick: () => actions.insert( "es")
       }),	   
       
@@ -275,22 +278,20 @@ h(Toolbar, {
       h(Button, {
         title: '2',
         label: "2",
-//  		icon: icon('go-next'),  
+
         onclick: () => actions.insert("2")
       }),
       
            h(Button, {
         title: '4',
        label: "4",
-//   		icon: icon('go-up'), 
-//        onclick: () => editor.navigateUp(1)
+
          onclick: () => actions.insert("4")
        }),   
       h(Button, {
         title: '8',
         label: "8",
-//    	icon: icon('go-down'),
-//        onclick: () => editor.navigateDown(1)
+
         onclick: () => actions.insert("8")
       }),
 
@@ -312,7 +313,7 @@ h(Toolbar, {
  
 
       h(Button, {
-        title: '.',
+        title: 'dot',
         label: ".",
 //    	icon: icon('go-down'),
 //        onclick: () => editor.navigateDown(1)
@@ -321,11 +322,11 @@ h(Toolbar, {
       
        h(Button, {
         title: 'More',
-        label: ">>",
-//    	icon: icon('go-down'),
+        label: "...",
+//    	icon: icon('view-sort-descending'),
 //        onclick: () => editor.navigateDown(1)
         onclick:  (ev) => actions.moreTools(ev)
-      }), 
+      }) 
            
       
  ]),
@@ -434,6 +435,118 @@ h(Toolbar, {
 		command: (cmd) => {
 			core.broadcast('Sandbox', 'Command',  cmd);
 		},
+
+
+		moreToolsRowI: (ev) => {
+
+      		contextmenu({
+					position: ev.target,
+/*
+ 						{
+ 
+          				label: '',
+          				onclick: () => editor.insert('')
+	
+						},
+*/
+ 					menu: [
+ 
+  						{
+ 
+          				label: '/',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '/')
+	
+						},
+						
+  						{
+ 
+          				label: '{',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '{')
+	
+						},
+						
+  						{
+ 
+          				label: '}',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '}')
+	
+						},	
+						
+						 {
+ 
+          				label: '<',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '<')
+	
+						},	
+						
+						{
+ 
+          				label: '>',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '>')
+	
+						},	
+
+						{
+        				label: '<<',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '<<')
+	
+						},	
+						
+						 {
+ 
+          				label: '>>',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '>>')
+	
+						},	
+ 
+						
+						 {
+ 
+          				label: '<>',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '<>')
+	
+						},					
+						{
+        				label: '(',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '(')
+	
+						},	
+						
+ 						{
+ 
+          				label: ')',
+							onclick: () => core.broadcast('Sandbox', 'Insert', ')')
+	
+						},			
+
+						{
+         				label: '[',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '[')
+	
+						},	
+						
+						{
+ 
+          				label: ']',
+							onclick: () => core.broadcast('Sandbox', 'Insert', ']')
+	
+						},	
+						
+						{
+         				label: ':',
+							onclick: () => core.broadcast('Sandbox', 'Insert', ':')
+	
+						}			
+					]
+
+
+
+
+					
+			});
+		},
+
+
 		moreTools: (ev) => {
 
       		contextmenu({
@@ -442,16 +555,21 @@ h(Toolbar, {
  					menu: [{
  
           				label: '64',
-          				onclick: () => editor.insert('64')
+ 							onclick: () => core.broadcast('Sandbox', 'Insert', '64')
 
 						},
 						
 						{
  
           				label: '128',
-          				onclick: () => editor.insert('128')
+							onclick: () => core.broadcast('Sandbox', 'Insert', '128')
 	
-						}]	
+						},
+						{
+          				label: '256',
+							onclick: () => core.broadcast('Sandbox', 'Insert', '256')
+	
+						}]						
 					
 			});
 		}
@@ -463,11 +581,11 @@ h(Toolbar, {
 
 	win.on('focus', () => {
 		core.broadcast('Sandbox', 'restore');
+		core.broadcast('Sandbox', 'focus');
 	});
 
-	proc.on('attention', (args) => {
 
-	});
+
 
 
 //	basic.init();
@@ -485,7 +603,7 @@ export const createEditorWindow = (core, proc) =>
 
 		dimension: {
 			width: 360,
-			height: 200
+			height: 208
 		},
 		position: 'bottomrleft'
 	})

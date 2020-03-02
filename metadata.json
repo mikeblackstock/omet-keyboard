@@ -1,7 +1,7 @@
 {
   "type": "application",
   "name": "Keyboard",
-  "category": "development",
+  "category": "mobile",
   "server": "server.js",
   "icon": "icon.png",
   "singleton": true,
