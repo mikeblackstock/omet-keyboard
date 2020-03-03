@@ -5,6 +5,7 @@
   "server": "server.js",
   "icon": "icon.png",
   "singleton": true,
+  "hidden":true,
   "title": {
     "en_EN": "Keyboard"
   },
